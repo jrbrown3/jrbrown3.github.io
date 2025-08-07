@@ -1,13 +1,432 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Gruppo|Michroma|Rajdhani&display=swap" rel="stylesheet">
-</head>
-<body style="background-color: lightgray; font-family: Michroma;">
-    <div style="text-align: center; padding-top: 15em;">
-        <h1 style="font-size: 40px;">Hustle Investments</h1>
-        <a href="mailto:holler@hustleinvestments.com" style="color: black;">Holler at us.</a>
-    </div>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>100% Hustle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        color: #000;
+        padding: 0 2rem;
+        padding-top: 120px; /* Prevent content hidden under fixed header */
+      }
 
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+
+      section {
+        border-radius: 12px;
+      }
+
+      .logo {
+        height: 100px;
+        margin-left: 3rem;
+      }
+
+      .menu {
+        display: flex;
+        gap: 1.5rem;
+        margin-right: 3rem;
+      }
+
+      .menu a {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      .hero {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 3rem;
+        background-color: #f8f8f8;
+        flex-wrap: wrap;
+      }
+
+      .hero-text {
+        flex: 1 1 50%;
+      }
+
+      .hero-text h1 {
+        font-size: 4.6875rem;
+        font-weight: normal;
+        margin-bottom: 1rem;
+      }
+
+      .hero-text h3 {
+        font-size: 2rem;
+        font-weight: normal;
+        margin-bottom: 2rem;
+      }
+
+      .hero-text button {
+        font-size: 1rem;
+        padding: 0.75rem 2rem;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      .hero-image {
+        flex: 1 1 50%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+      }
+
+      .products {
+        background-color: #fff;
+        padding: 4rem 0;
+      }
+
+      .products::before {
+        content: "Strategy Performance";
+        display: block;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .product {
+        text-align: center;
+        position: relative;
+      .chart-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        border-radius: 12px;
+        pointer-events: none;
+        z-index: 2;
+      }
+      }
+
+      .product canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+
+      .contact {
+        background-color: #f8f8f8;
+        padding: 4rem 0;
+      }
+
+      .contact::before {
+        content: "Holler at us";
+        display: block;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .contact form {
+        display: grid;
+        gap: 1rem;
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .contact input,
+      .contact textarea {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        width: 100%;
+      }
+
+      .contact label {
+        font-weight: bold;
+      }
+
+      .contact button {
+        font-size: 1rem;
+        padding: 0.75rem;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        background-color: #fff;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="logo.webp" alt="100% Hustle Logo" class="logo" />
+      <nav class="menu">
+        <a href="#">Home</a>
+        <a href="#products">Performance</a>
+        <a href="#contact">Contact us</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Built to Outperform. Wired to Win.</h1>
+        <h3>We build high-performance algorithmic trading systems that never sleep. Every line of code is designed to execute faster, think smarter, and deliver alpha in any market.</h3>
+        <button onclick="location.href='#contact'">Contact us</button>
+      </div>
+      <div class="hero-image">
+        <img src="hero.webp" alt="Hero Image" />
+      </div>
+    </section>
+
+    <section id="products" class="products">
+      <div class="products-grid">
+        <div class="product">
+          <canvas id="chart1"></canvas>
+          <h3>Hustle 500</h3>
+          <p>Aggressive when it counts, defensive when it matters — algorithmic trading designed to dominate the S&P 500.</p>
+        </div>
+        <div class="product">
+          <canvas id="chart2"></canvas>
+          <div class="chart-overlay">Coming Soon</div>
+          <h3>MicroBurst</h3>
+          <p>Hits fast, hits smart — targeting short-lived momentum bursts in small caps with calculated aggression.</p>
+        </div>
+        <div class="product">
+          <canvas id="chart3"></canvas>
+          <div class="chart-overlay">Coming Soon</div>
+          <h3>Headline Hunter</h3>
+          <p>Where news meets speed — this algo spots narrative-driven momentum and turns it into profit potential.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <form id="pushoverForm">
+      <label for="first">First Name</label>
+      <input type="text" id="first" name="first" required />
+
+      <label for="last">Last Name</label>
+      <input type="text" id="last" name="last" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" name="subject" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+
+      <label for="captcha">What is 3 + 4?</label>
+      <input type="text" id="captcha" name="captcha" required pattern="7" autocomplete="off" />
+      <span id="captchaError" style="color:red;display:none;">Incorrect answer. Please try again.</span>
+
+      <button type="submit">Holler</button>
+      </form>
+      <div id="pushoverStatus" class="pushover-status"></div>
+      <div id="successMessage" style="display:none;text-align:center;margin-top:2rem;font-size:1.5rem;font-weight:bold;color:green;">Thank you! Your message was sent successfully.</div>
+      <script>
+      document.getElementById('pushoverForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const status = document.getElementById('pushoverStatus');
+        status.textContent = '';
+        const form = e.target;
+        const captchaError = document.getElementById('captchaError');
+        const successMessage = document.getElementById('successMessage');
+        captchaError.style.display = 'none';
+        if (form.captcha.value.trim() !== '7') {
+          captchaError.style.display = 'inline';
+          return;
+        }
+        const data = {
+          token: 'aov2y2jx6szju8ow87p6jj85tjsyb5',
+          user: 'uzpuskqqtdz916er1c1gnim28r1j8y',
+          title: form.subject.value,
+          message:
+            `From: ${form.first.value} ${form.last.value}\nEmail: ${form.email.value}\n\n${form.message.value}`
+        };
+        try {
+          const res = await fetch('https://api.pushover.net/1/messages.json', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data)
+          });
+          if (res.ok) {
+            form.style.display = 'none';
+            status.style.display = 'none';
+            successMessage.style.display = 'block';
+          } else {
+            status.textContent = 'Failed to send. Please try again.';
+          }
+        } catch {
+          status.textContent = 'Error sending message.';
+        }
+      });
+      </script>
+    </section>
+
+    <footer>
+      &copy; 100% Hustle 2025
+    </footer>
+
+    <script>
+      const chartConfigs = [
+        {
+          id: 'chart1',
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+          datasets: [
+            {
+              label: 'Hustle 500',
+              data: [5.28, 5.1, 3.35, 3.07, 6.68, 9.01, 9.96],
+              borderColor: 'rgba(0, 128, 0, 1)',
+              backgroundColor: 'rgba(0, 128, 0, 0.2)',
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'S&P 500',
+              data: [2.78, 1.44, -4.27, -4.92, 1.06, 6.2, 8.59],
+              borderColor: 'rgba(255, 165, 0, 1)',
+              backgroundColor: 'rgba(255, 165, 0, 0.1)',
+              fill: false,
+              tension: 0.4
+            }
+          ]
+        },
+        {
+          id: 'chart2',
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [
+            {
+              label: 'MicroBurst',
+              data: [5, 15, 10, 20, 25, 35],
+              borderColor: 'rgba(0, 128, 0, 1)',
+              backgroundColor: 'rgba(0, 128, 0, 0.2)',
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'Benchmark',
+              data: [4, 12, 8, 16, 22, 30],
+              borderColor: 'rgba(0, 0, 255, 1)',
+              backgroundColor: 'rgba(0, 0, 255, 0.1)',
+              fill: false,
+              tension: 0.4
+            }
+          ]
+        },
+        {
+          id: 'chart3',
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [
+            {
+              label: 'Headline Hunter',
+              data: [12, 18, 14, 22, 28, 40],
+              borderColor: 'rgba(0, 128, 0, 1)',
+              backgroundColor: 'rgba(0, 128, 0, 0.2)',
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'Benchmark',
+              data: [10, 16, 12, 18, 24, 36],
+              borderColor: 'rgba(0, 0, 255, 1)',
+              backgroundColor: 'rgba(0, 0, 255, 0.1)',
+              fill: false,
+              tension: 0.4
+            }
+          ]
+        }
+      ];
+
+      chartConfigs.forEach(({ id, labels, datasets }) => {
+        new Chart(document.getElementById(id), {
+          type: 'line',
+          data: {
+            labels,
+            datasets
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                labels: {
+                  usePointStyle: true,
+                  pointStyle: 'line', // Use point style (circle) for legend
+                  color: '#333',
+                  font: {
+                    size: 16,
+                    family: 'Roboto',
+                    weight: 'bold'
+                  },
+                  boxWidth: 16,
+                  padding: 20
+                }
+              }
+            },
+            scales: {
+              x: {
+                grid: {
+                  color: '#eee'
+                },
+                ticks: {
+                  color: '#000'
+                }
+              },
+              y: {
+                beginAtZero: true,
+                grid: {
+                  color: '#eee'
+                },
+                ticks: {
+                  color: '#000'
+                }
+              }
+            }
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
