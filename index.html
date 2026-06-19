@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J.R. Brown</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --ink: #111111;
+    --muted: #666666;
+    --line: #e3e1dd;
+    --node: #d8d5cf;
+    --accent: #0f172a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* background network graphic, anchored to the right side */
+  .network {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 46%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.55;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1024px;
+    padding: 40px 24px;
+    margin: 0 auto;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+  }
+
+  .text {
+    flex: 1 1 520px;
+    min-width: 0;
+  }
+
+  .name {
+    font-family: "Inter", sans-serif;
+    font-size: 96px;
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+    color: var(--ink);
+  }
+
+  .title {
+    margin-top: 18px;
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-weight: 500; /* Label: 500 */
+    letter-spacing: 0.01em;
+  }
+
+  .title .dot {
+    margin: 0 10px;
+    color: #c9c6c0;
+  }
+
+  .bio {
+    margin-top: 22px;
+    max-width: 420px;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    font-weight: 400; /* Body text: 400 */
+    color: #3a3a3a;
+  }
+
+  .section-heading {
+    font-weight: 600; /* Section headings: 600 */
+  }
+
+  .links {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    border-radius: 5px;
+    font-size: 0.98rem;
+    font-weight: 500; /* Label: 500 */
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn:hover { transform: translateY(-1px); }
+  .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .btn.solid {
+    background: var(--accent);
+    color: #ffffff;
+    border: 1px solid var(--accent);
+  }
+
+  .btn.solid:hover {
+    background: #1c2940;
+    border-color: #1c2940;
+  }
+
+  .btn.outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid #d8d6d1;
+  }
+
+  .btn.outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn.logo {
+    background: transparent;
+    border: 1px solid #d8d6d1;
+    padding: 12px 20px;
+  }
+
+  .btn.logo:hover {
+    border-color: var(--accent);
+  }
+
+  .btn.logo img {
+    height: 18px;
+    width: auto;
+    display: block;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .icon svg { width: 100%; height: 100%; }
+
+  .portrait-wrap {
+    flex: 0 0 auto;
+    position: relative;
+    width: clamp(220px, 26vw, 360px);
+    height: clamp(220px, 26vw, 360px);
+  }
+
+  .portrait {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #d9d6d0;
+    box-shadow: 0 20px 40px -16px rgba(0,0,0,0.18);
+  }
+
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 760px) {
+    .card {
+      flex-direction: column;
+      text-align: center;
+      gap: 32px;
+    }
+    .text { display: flex; flex-direction: column; align-items: center; order: 2; }
+    .portrait-wrap { order: 1; }
+    .bio { max-width: 360px; }
+    .links { justify-content: center; }
+    .network { width: 100%; opacity: 0.35; }
+    .name { font-size: 56px; }
+  }
+
+  @media (max-width: 420px) {
+    .name { font-size: 42px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <svg class="network" viewBox="0 0 600 700" preserveAspectRatio="xMaxYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#cfcdc6" stroke-width="1">
+      <line x1="120" y1="60" x2="260" y2="140"/>
+      <line x1="260" y1="140" x2="220" y2="260"/>
+      <line x1="260" y1="140" x2="420" y2="110"/>
+      <line x1="220" y1="260" x2="340" y2="320"/>
+      <line x1="340" y1="320" x2="480" y2="280"/>
+      <line x1="480" y1="280" x2="560" y2="180"/>
+      <line x1="340" y1="320" x2="300" y2="440"/>
+      <line x1="300" y1="440" x2="180" y2="480"/>
+      <line x1="300" y1="440" x2="380" y2="540"/>
+      <line x1="380" y1="540" x2="320" y2="640"/>
+      <line x1="380" y1="540" x2="500" y2="600"/>
+      <line x1="180" y1="480" x2="100" y2="560"/>
+      <line x1="420" y1="110" x2="540" y2="60"/>
+      <line x1="220" y1="260" x2="100" y2="220"/>
+    </g>
+    <g fill="#c2bfb7">
+      <circle cx="120" cy="60" r="4"/>
+      <circle cx="260" cy="140" r="4"/>
+      <circle cx="420" cy="110" r="4"/>
+      <circle cx="220" cy="260" r="4"/>
+      <circle cx="100" cy="220" r="3.5"/>
+      <circle cx="340" cy="320" r="4"/>
+      <circle cx="480" cy="280" r="4"/>
+      <circle cx="560" cy="180" r="4"/>
+      <circle cx="540" cy="60" r="3.5"/>
+      <circle cx="300" cy="440" r="4"/>
+      <circle cx="180" cy="480" r="4"/>
+      <circle cx="100" cy="560" r="3.5"/>
+      <circle cx="380" cy="540" r="4"/>
+      <circle cx="320" cy="640" r="3.5"/>
+      <circle cx="500" cy="600" r="3.5"/>
+    </g>
+  </svg>
+
+  <main class="page">
+    <div class="card">
+      <div class="text">
+        <h1 class="name">J.R. Brown</h1>
+        <p class="title">Tech Executive<span class="dot">&middot;</span>AI Strategist<span class="dot">&middot;</span>Market Analyst<span class="dot">&middot;</span>Developer</p>
+        <p class="bio">AI, code, and data are my native language — I use them to find what the data is trying to say before everyone else hears it.</p>
+
+        <div class="links">
+          <a class="btn solid" href="https://www.linkedin.com/in/jrbrown3/" target="_blank" rel="noopener">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+            </span>
+            LinkedIn
+          </a>
+          <a class="btn outline" href="https://github.com/jrbrown3" target="_blank" rel="noopener">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.13-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.16.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.41-5.27 5.69.42.36.78 1.08.78 2.17 0 1.57-.01 2.83-.01 3.22 0 .31.21.67.8.56C20.21 21.39 23.5 17.08 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg>
+            </span>
+            GitHub
+          </a>
+          <a class="btn logo" href="https://www.100hustle.com" target="_blank" rel="noopener" aria-label="100Hustle">
+            <img src="data:image/webp;base64,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" alt="100Hustle">
+          </a>
+        </div>
+      </div>
+
+      <div class="portrait-wrap">
+        <div class="portrait">
+          <img src="https://api.dicebear.com/7.x/initials/svg?seed=JR%20Brown&backgroundColor=d9d6d0&textColor=4a4a4a&fontSize=38" alt="Portrait placeholder for J.R. Brown">
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
